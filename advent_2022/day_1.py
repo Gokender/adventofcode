@@ -1,17 +1,9 @@
-from collections import defaultdict
 from pathlib import Path
 
 def get_elf_max_calorie(input:str, nb_elves:int = 1) -> list:
-    cpt = 0
-    data = defaultdict(list)
 
-    for i in input.splitlines():
-        if i == '':
-            cpt+=1
-        else:
-            data[cpt].append(int(i))
-
-    result = [(key+1, sum(value)) for key, value in data.items()]
+    data = [map(int, i.split('\n')) for i in input.split('\n\n')]
+    result = [(index+1, sum(value)) for index, value in enumerate(data)]
     result.sort(key=lambda a: a[1], reverse=True)
     return result[:nb_elves]
 
